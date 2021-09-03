@@ -32,7 +32,7 @@ app.MapGet("/", () => Results.Ok());
 app.MapGet("/posts", ([FromServices] PostRepository repo)
 	=> repo.Select(x => new { x.Id, x.Title, x.Date, x.Author, Uri = $"/posts/{x.Id}" /*HATEOAS?*/ }));
 
-// list a post by given id
+// get a post by given id
 app.MapGet("/posts/{id}", ([FromServices] PostRepository repo, Guid id) =>
 {
 	var post = repo.FirstOrDefault(x => x.Id == id);
@@ -42,7 +42,7 @@ app.MapGet("/posts/{id}", ([FromServices] PostRepository repo, Guid id) =>
 });
 
 // create a new post
-app.MapPost("/posts", ([FromServices] PostRepository repo, Post model) =>
+app.MapPost("/posts", ([FromServices] PostRepository repo, PostModel model) =>
 {
 	Post post = new(Guid.NewGuid(), model.Title, DateTime.Now, model.Author, model.Content, new List<Comment>());
 	repo.Add(post);
@@ -51,7 +51,8 @@ app.MapPost("/posts", ([FromServices] PostRepository repo, Post model) =>
 });
 
 // patch a post by given id
-app.MapMethods("/posts/{id}", new[] { "patch" }, ([FromServices] PostRepository repo, Guid id, Post model) => 
+// No MapPatch method yet ;(
+app.MapMethods("/posts/{id}", new[] { "patch" }, ([FromServices] PostRepository repo, Guid id, PostModel model) => 
 {
 	var post = repo.FirstOrDefault(x => x.Id == id);
 	if (post == null)
@@ -81,21 +82,21 @@ app.MapGet("/posts/{postId}/comments", ([FromServices] PostRepository repo, Guid
 });
 
 // create a comment
-app.MapPost("/posts/{postId}/comments", ([FromServices] PostRepository repo, Guid postId, Comment comment) =>
+app.MapPost("/posts/{postId}/comments", ([FromServices] PostRepository repo, Guid postId, CommentModel model) =>
 {
 	var post = repo.FirstOrDefault(x => x.Id == postId);
 
 	if (post == null)
 		return Results.NotFound();
 
-	Comment commentToSave = new(Guid.NewGuid(), DateTime.Now, comment.Author, comment.Content, 0);
+	Comment commentToSave = new(Guid.NewGuid(), DateTime.Now, model.Author, model.Content, 0);
 	post.Comments.Add(commentToSave);
 
 	return Results.Created($"/posts/{postId}/comments", commentToSave);
 });
 
-// patch a comment by given comment id
-app.MapMethods("/vote/{id}", new[] { "patch" }, ([FromServices] PostRepository repo, Guid id) =>
+// patch a comment by voting up on given comment id
+app.MapMethods("/comments/{id}/vote-up", new[] { "patch" }, ([FromServices] PostRepository repo, Guid id) =>
 {
 	foreach (var post in repo)
 	{
@@ -113,20 +114,50 @@ app.MapMethods("/vote/{id}", new[] { "patch" }, ([FromServices] PostRepository r
 	return Results.NotFound();
 });
 
-// delete a comment
-app.MapDelete("/comments/{id}", ([FromServices] PostRepository repo, Guid id) =>
+// patch a comment by voting down on given comment id
+app.MapMethods("/comments/{id}/vote-down", new[] { "patch" }, ([FromServices] PostRepository repo, Guid id) =>
 {
-	foreach (var post in repo) 
+	foreach (var post in repo)
 	{
 		var comment = post.Comments.FirstOrDefault(x => x.Id == id);
 		if (comment != null)
+		{
+			var index = post.Comments.IndexOf(comment);
+			Comment commentToSave = new(id, comment.Date, comment.Author, comment.Content, comment.Votes - 1);
+			post.Comments[index] = commentToSave;
+
+			return Results.Ok(commentToSave);
+		}
+	}
+
+	return Results.NotFound();
+});
+
+// delete a comment
+app.MapDelete("/comments/{id}", ([FromServices] PostRepository repo, Guid id) =>
+{
+	foreach (var post in repo)
+	{
+		var comment = post.Comments.FirstOrDefault(x => x.Id == id);
+		if (comment != null)
+		{
 			post.Comments.Remove(comment);
+			break;
+		}
 	}
 
 	return Results.NoContent();
 });
 
 app.Run();
+
+// ---------------------------------------------------------------------------------------
+// Input Models
+// ---------------------------------------------------------------------------------------
+
+record PostModel(string Title, string Author, string Content);
+
+record CommentModel(string Author, string Content);
 
 // ---------------------------------------------------------------------------------------
 // Models
@@ -139,6 +170,7 @@ record Post(Guid Id, string Title, DateTime Date, string Author, string Content,
 
 record Comment(Guid Id, DateTime Date, string Author, string Content, int Votes)
 	: BaseModel(Id, Date);
+
 
 // ---------------------------------------------------------------------------------------
 // Infrastructure
