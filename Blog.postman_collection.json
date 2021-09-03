@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "b7d65129-d8ed-4dc1-acb6-af70adc2a836",
+		"name": "Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/posts/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/posts/e8897d98-ad59-4367-99a2-f6f727666cb4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"posts",
+						"e8897d98-ad59-4367-99a2-f6f727666cb4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Felipe is a great developer\",\r\n    \"author\": \"Felipe\",\r\n    \"Content\": \"Felipe is trying to write an api written in .NET 6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/posts",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/{id}",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Felipe will be great developer!\",\r\n    \"author\": \"Oriani\",\r\n    \"Content\": \"Felipe is trying to write an api written in .NET 6!!!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/posts/8f8622f4-2f20-486c-8c7e-ae334af65312",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"posts",
+						"8f8622f4-2f20-486c-8c7e-ae334af65312"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/posts/e8897d98-ad59-4367-99a2-f6f727666cb4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"posts",
+						"e8897d98-ad59-4367-99a2-f6f727666cb4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/{postId}/comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/posts/d9d2bd81-1cab-4996-acca-7adf60c1a3bc/comments",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"posts",
+						"d9d2bd81-1cab-4996-acca-7adf60c1a3bc",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/{postId}/comments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"author\": \"Felipe\",\r\n    \"content\": \"Thank you!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/posts/118b54a0-5bb1-489a-8ccc-e6db5bf0e130/comments",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"posts",
+						"118b54a0-5bb1-489a-8ccc-e6db5bf0e130",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/{postId}",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "5",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/comments/d552a035-3b60-4831-9c91-d1cada0f535f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"comments",
+						"d552a035-3b60-4831-9c91-d1cada0f535f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/{postId}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "5",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/comments/d552a035-3b60-4831-9c91-d1cada0f535f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"comments",
+						"d552a035-3b60-4831-9c91-d1cada0f535f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/{commentId}/vote-up",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "5",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/comments/d552a035-3b60-4831-9c91-d1cada0f535f/vote-up",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"comments",
+						"d552a035-3b60-4831-9c91-d1cada0f535f",
+						"vote-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/{commentId}/vote-down",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "5",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/comments/d552a035-3b60-4831-9c91-d1cada0f535f/vote-down",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"comments",
+						"d552a035-3b60-4831-9c91-d1cada0f535f",
+						"vote-down"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
