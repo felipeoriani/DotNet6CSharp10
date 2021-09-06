@@ -29,11 +29,11 @@ var app = builder.Build();
 app.MapGet("/", () => Results.Ok());
 
 // list the head of all the posts
-app.MapGet("/posts", ([FromServices] PostRepository repo)
+app.MapGet("/posts", (PostRepository repo)
 	=> repo.Select(x => new { x.Id, x.Title, x.Date, x.Author, Uri = $"/posts/{x.Id}" /*HATEOAS?*/ }));
 
 // get a post by given id
-app.MapGet("/posts/{id}", ([FromServices] PostRepository repo, Guid id) =>
+app.MapGet("/posts/{id}", (PostRepository repo, Guid id) =>
 {
 	var post = repo.FirstOrDefault(x => x.Id == id);
 	return post != null
@@ -52,7 +52,7 @@ app.MapPost("/posts", ([FromServices] PostRepository repo, PostModel model) =>
 
 // patch a post by given id
 // No MapPatch method yet ;(
-app.MapMethods("/posts/{id}", new[] { "patch" }, ([FromServices] PostRepository repo, Guid id, PostModel model) => 
+app.MapMethods("/posts/{id}", new[] { "patch" }, (PostRepository repo, Guid id, PostModel model) => 
 {
 	var post = repo.FirstOrDefault(x => x.Id == id);
 	if (post == null)
@@ -65,14 +65,14 @@ app.MapMethods("/posts/{id}", new[] { "patch" }, ([FromServices] PostRepository 
 });
 
 // delete a post gy given id
-app.MapDelete("/posts/{id}", ([FromServices] PostRepository repo, Guid id) =>
+app.MapDelete("/posts/{id}", (PostRepository repo, Guid id) =>
 {
 	repo.RemoveAll(x => x.Id == id);
 	return Results.NoContent();
 });
 
 // list all the comments of a given post id
-app.MapGet("/posts/{postId}/comments", ([FromServices] PostRepository repo, Guid postId) =>
+app.MapGet("/posts/{postId}/comments", (PostRepository repo, Guid postId) =>
 {
 	var comments = repo.FirstOrDefault(x => x.Id == postId)?.Comments;
 
@@ -82,7 +82,7 @@ app.MapGet("/posts/{postId}/comments", ([FromServices] PostRepository repo, Guid
 });
 
 // create a comment
-app.MapPost("/posts/{postId}/comments", ([FromServices] PostRepository repo, Guid postId, CommentModel model) =>
+app.MapPost("/posts/{postId}/comments", (PostRepository repo, Guid postId, CommentModel model) =>
 {
 	var post = repo.FirstOrDefault(x => x.Id == postId);
 
@@ -96,7 +96,7 @@ app.MapPost("/posts/{postId}/comments", ([FromServices] PostRepository repo, Gui
 });
 
 // patch a comment by voting up on given comment id
-app.MapMethods("/comments/{id}/vote-up", new[] { "patch" }, ([FromServices] PostRepository repo, Guid id) =>
+app.MapMethods("/comments/{id}/vote-up", new[] { "patch" }, (PostRepository repo, Guid id) =>
 {
 	foreach (var post in repo)
 	{
@@ -115,7 +115,7 @@ app.MapMethods("/comments/{id}/vote-up", new[] { "patch" }, ([FromServices] Post
 });
 
 // patch a comment by voting down on given comment id
-app.MapMethods("/comments/{id}/vote-down", new[] { "patch" }, ([FromServices] PostRepository repo, Guid id) =>
+app.MapMethods("/comments/{id}/vote-down", new[] { "patch" }, (PostRepository repo, Guid id) =>
 {
 	foreach (var post in repo)
 	{
@@ -134,7 +134,7 @@ app.MapMethods("/comments/{id}/vote-down", new[] { "patch" }, ([FromServices] Po
 });
 
 // delete a comment
-app.MapDelete("/comments/{id}", ([FromServices] PostRepository repo, Guid id) =>
+app.MapDelete("/comments/{id}", (PostRepository repo, Guid id) =>
 {
 	foreach (var post in repo)
 	{
