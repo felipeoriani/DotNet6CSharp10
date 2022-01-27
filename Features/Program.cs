@@ -1,13 +1,10 @@
 ﻿using Features.Models;
-using System;
-using System.Linq;
-using System.Collections.Generic;
+using Features.Clients;
 
 // Constant Interpolated Strings
+ApiClient client = new ApiClient();
 
-
-
-
+// LINQ: New features and improvements
 
 List<City> cities = new List<City>()
 {
@@ -19,26 +16,20 @@ List<City> cities = new List<City>()
 	new City() { Name = "Odessa", Country = "Ukraine", Population = 900_000 }
 };
 
-// LINQ: New features and improvements
-
-/*
 // How can we get the city with the largest population?
 
-var bigestPopulationCity = ?
+City? bigestPopulationCity = cities.MaxBy(x => x.Population);
 
 Console.WriteLine(bigestPopulationCity);
 
 // How can we get the city with the smallest population?
 
-var smallestPopulationCity = ?
+City? smallestPopulationCity = cities.MinBy(x => x.Population);
 
 Console.WriteLine(smallestPopulationCity);
-*/
 
-// FirstOrDefault, LastOrDefault
-
-string[] names = new string[] 
-{ 
+string[] names =
+{
 	"Jacob",
 	"Hendra",
 	"Jeff",
@@ -49,11 +40,46 @@ string[] names = new string[]
 	"Dasha"
 };
 
-// Take and Ranges
-Range r = 1..^1;
-var results = names.Take(r);
+string[] team =
+{
+	"Dasha",
+	"Denis",
+	"Felipe"
+};
 
-foreach (var name in results)
+// FirstOrDefault: Now it contains a default value
+
+var firstNameWithA = names.FirstOrDefault(x => x.StartsWith("A"), "### No name found ###");
+
+// LastOrDefault: Now it contains a default value in case 
+
+var lastNameWithB = names.LastOrDefault(x => x.StartsWith("B"), "### No name found ###");
+
+
+// New method inspired on set theory
+Console.WriteLine("Union");
+foreach (var name in names.UnionBy(team, x => x))
 	Console.WriteLine(name);
 
-// File-scoped namespaces and Global Usings
+Console.WriteLine("Intersect");
+foreach (var name in names.IntersectBy(team, x => x))
+	Console.WriteLine(name);
+
+Console.WriteLine("Except");
+foreach (var name in names.ExceptBy(team, x => x))
+	Console.WriteLine(name);
+
+// Take and Ranges
+
+
+Console.WriteLine("2..5: start on the 2nd and end on 5th element");
+foreach (var name in names.Take(1..^1))
+	Console.WriteLine(name);
+
+Console.WriteLine("1..^1: start on the 1st and end on the penultimate");
+foreach (var name in names.Take(1..^1))
+	Console.WriteLine(name);
+
+Console.WriteLine("^4..^2: counting backwards, start on the 4th and end on the 2nd.");
+foreach (var name in names.Take(^4..^2))
+	Console.WriteLine(name);

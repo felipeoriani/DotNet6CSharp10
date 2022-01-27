@@ -35,12 +35,20 @@ app.MapGet("/", () => Results.Ok(new { ProcessId = System.Diagnostics.Process.Ge
 
 // GET: list the head of all the posts
 app.MapGet("/post", (PostRepository repo)
-	=> repo.Select(x => new { x.Id, x.Title, x.Date, x.Author, Uri = $"/posts/{x.Id}" /*HATEOAS?*/ }).ToList());
+	=> repo.Select(x => new 
+	{ 
+		x.Id, 
+		x.Title, 
+		x.Date, 
+		x.Author, 
+		Uri = $"/posts/{x.Id}" /*HATEOAS?*/
+	}).ToList());
 
 // get a post by given id
 app.MapGet("/posts/{id}", (PostRepository repo, Guid id) =>
 {
-	var post = repo.FirstOrDefault(x => x.Id == id);
+	Post? post = repo.FirstOrDefault(x => x.Id == id);
+
 	return post != null
 		? Results.Ok(post)
 		: Results.NotFound();
@@ -154,9 +162,7 @@ app.MapDelete("/comments/{id}", (PostRepository repo, Guid id) =>
 	return Results.NoContent();
 });
 
-
 app.Run();
-
 
 // ---------------------------------------------------------------------------------------
 // Input Models
