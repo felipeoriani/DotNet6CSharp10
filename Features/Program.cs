@@ -73,7 +73,7 @@ foreach (var name in names.ExceptBy(team, x => x))
 
 
 Console.WriteLine("2..5: start on the 2nd and end on 5th element");
-foreach (var name in names.Take(1..^1))
+foreach (var name in names.Take(2..^5))
 	Console.WriteLine(name);
 
 Console.WriteLine("1..^1: start on the 1st and end on the penultimate");
