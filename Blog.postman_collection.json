@@ -1,25 +1,36 @@
 {
 	"info": {
-		"_postman_id": "b7d65129-d8ed-4dc1-acb6-af70adc2a836",
+		"_postman_id": "3bfc3db7-8e53-43dd-ba59-4f98f2e4a140",
 		"name": "Blog",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}",
+					"host": [
+						"{{base_url}}"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "/posts",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/posts/",
-					"protocol": "https",
+					"raw": "{{base_url}}/posts",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
-						"posts",
-						""
+						"posts"
 					]
 				}
 			},
@@ -31,12 +42,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/posts/e8897d98-ad59-4367-99a2-f6f727666cb4",
-					"protocol": "https",
+					"raw": "{{base_url}}/posts/e8897d98-ad59-4367-99a2-f6f727666cb4",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"posts",
 						"e8897d98-ad59-4367-99a2-f6f727666cb4"
@@ -52,7 +61,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Felipe is a great developer\",\r\n    \"author\": \"Felipe\",\r\n    \"Content\": \"Felipe is trying to write an api written in .NET 6\"\r\n}",
+					"raw": "{\r\n    \"title\": \"The ocmpany has started tech modernization\",\r\n    \"author\": \"Mike\",\r\n    \"Content\": \"The Company has started working on the tech modernization by monolith decomposition in order to improve not only technology but its processes.\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,12 +69,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/posts",
-					"protocol": "https",
+					"raw": "{{base_url}}/posts",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"posts"
 					]
@@ -80,7 +87,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Felipe will be great developer!\",\r\n    \"author\": \"Oriani\",\r\n    \"Content\": \"Felipe is trying to write an api written in .NET 6!!!\"\r\n}",
+					"raw": "{\r\n    \"title\": \"The company is hiring new developers\",\r\n    \"author\": \"John\",\r\n    \"Content\": \"Our company starts this new year by hiring new software developer to speed up the tech modernization\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,12 +95,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/posts/8f8622f4-2f20-486c-8c7e-ae334af65312",
-					"protocol": "https",
+					"raw": "{{base_url}}/posts/8f8622f4-2f20-486c-8c7e-ae334af65312",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"posts",
 						"8f8622f4-2f20-486c-8c7e-ae334af65312"
@@ -108,12 +113,10 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/posts/e8897d98-ad59-4367-99a2-f6f727666cb4",
-					"protocol": "https",
+					"raw": "{{base_url}}/posts/e8897d98-ad59-4367-99a2-f6f727666cb4",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"posts",
 						"e8897d98-ad59-4367-99a2-f6f727666cb4"
@@ -128,12 +131,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/posts/d9d2bd81-1cab-4996-acca-7adf60c1a3bc/comments",
-					"protocol": "https",
+					"raw": "{{base_url}}/posts/d9d2bd81-1cab-4996-acca-7adf60c1a3bc/comments",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"posts",
 						"d9d2bd81-1cab-4996-acca-7adf60c1a3bc",
@@ -158,12 +159,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/posts/118b54a0-5bb1-489a-8ccc-e6db5bf0e130/comments",
-					"protocol": "https",
+					"raw": "{{base_url}}/posts/118b54a0-5bb1-489a-8ccc-e6db5bf0e130/comments",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"posts",
 						"118b54a0-5bb1-489a-8ccc-e6db5bf0e130",
@@ -188,12 +187,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/comments/d552a035-3b60-4831-9c91-d1cada0f535f",
-					"protocol": "https",
+					"raw": "{{base_url}}/comments/d552a035-3b60-4831-9c91-d1cada0f535f",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"comments",
 						"d552a035-3b60-4831-9c91-d1cada0f535f"
@@ -217,12 +214,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/comments/d552a035-3b60-4831-9c91-d1cada0f535f",
-					"protocol": "https",
+					"raw": "{{base_url}}/comments/d552a035-3b60-4831-9c91-d1cada0f535f",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"comments",
 						"d552a035-3b60-4831-9c91-d1cada0f535f"
@@ -246,12 +241,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/comments/d552a035-3b60-4831-9c91-d1cada0f535f/vote-up",
-					"protocol": "https",
+					"raw": "{{base_url}}/comments/d552a035-3b60-4831-9c91-d1cada0f535f/vote-up",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"comments",
 						"d552a035-3b60-4831-9c91-d1cada0f535f",
@@ -276,12 +269,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/comments/d552a035-3b60-4831-9c91-d1cada0f535f/vote-down",
-					"protocol": "https",
+					"raw": "{{base_url}}/comments/d552a035-3b60-4831-9c91-d1cada0f535f/vote-down",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5001",
 					"path": [
 						"comments",
 						"d552a035-3b60-4831-9c91-d1cada0f535f",
@@ -290,6 +281,33 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://localhost:7080",
+			"type": "string"
 		}
 	]
 }
